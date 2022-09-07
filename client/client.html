@@ -25,13 +25,27 @@
   </style>
   <script>
     const sendFetchRequest = (url, acceptedType) => {
+      const options = {
+        method: 'GET',
+        headers: {
+          'Accept': acceptedType
+        },
+      };
 
+      const fetchPromise = fetch(url, options);
+
+      fetchPromise.then((response) => {
+        console.dir(response);
+      })
     };
 
     const init = () => {
       const jsonButton = document.querySelector("#getCatsJSON");
       const xmlButton = document.querySelector("#getCatsXML");
 
+      jsonButton.addEventListener('click', () => sendFetchRequest('/cats', 'appliciation/json'))
+
+      xmlButton.addEventListener('click', () => sendFetchRequest('/cats', 'text/xml'));
     };
 
     window.onload = init;

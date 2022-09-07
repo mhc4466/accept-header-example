@@ -12,6 +12,17 @@ const getIndex = (request, response) => {
   respond(request, response, index, 'text/html');
 };
 
+const getCats = (request, response, acceptedTypes) => {
+  const cat = {
+    name: 'Roosevelt',
+    age: 13
+  }
+
+  const catString = JSON.stringify(cat);
+  //"return" optional but good to confirm end of function
+  return respond(request, response, catString, 'application/json');
+}
+
 module.exports = {
   getCats,
   getIndex,
