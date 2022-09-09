@@ -18,6 +18,22 @@ const getCats = (request, response, acceptedTypes) => {
     age: 13
   }
 
+  if (acceptedTypes[0] === 'text/xml') {
+    //Assist for constructing the XML:
+    /*
+      <response>
+        <name>Roosevelt</name>
+        <age>13</age>
+      </response>
+    */
+   let responseXML = '<response>';
+   responseXML += `<name>${cat.name}</name>`;
+   responseXML += `<age>${cat.age}</age>`;
+   responseXML += '</response>';
+
+   return respond(request, response, responseXML, 'text/xml');
+  }
+
   const catString = JSON.stringify(cat);
   //"return" optional but good to confirm end of function
   return respond(request, response, catString, 'application/json');
